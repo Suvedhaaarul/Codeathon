@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ReactDeveloper {
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args){
+        int n = sc.nextInt();
+        System.out.println(reactcommunity(n));
+    }
+    public static boolean reactcommunity(int N) {
+        int[] members = new int[N];
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        boolean[] vis = new boolean[N];
+        for (int i = 0; i < N; i++) {
+            members[i] = sc.nextInt();
+        }
+        int com = sc.nextInt();
+        for (int i = 0; i < com; i++) {
+            list.add(new ArrayList<>());
+        }
+        for (int j = 0; j < com; j++) {
+            int x1 = sc.nextInt();
+            int x2 = sc.nextInt();
+            int id1 = -1, id2 = -1;
+            for (int i = 0; i < members.length; i++) {
+                if (members[i] == x1) {
+                    id1 = i;
+                }
+                if (members[i] == x2) {
+                    id2 = i;
+                }
+            }
+            if (id1 != -1 && id2 != -1) {
+                list.get(id1).add(id2);
+            }
+        }
+        int y1 = sc.nextInt();
+        int y2 = sc.nextInt();
+        int Xid1 = -1, Xid2 = -1;
+        for (int i = 0; i < members.length; i++) {
+            if (members[i] == y1) {
+                Xid1 = i;
+            }
+            if (members[i] == y2) {
+                Xid2 = i;
+            }
+        }
+        dfs(list,vis,Xid1);
+        return vis[Xid2];
+    }
+    public static void dfs(ArrayList<ArrayList<Integer>> graph, boolean[] vis, int i){
+        vis[i]=true;
+        for(int ele:graph.get(i)){
+            if(!vis[ele]==true){
+                dfs(graph,vis,ele);
+            }
+        }
+    }
+
+}
