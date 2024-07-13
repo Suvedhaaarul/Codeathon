@@ -1,0 +1,28 @@
+public class substring {
+    public static void main(String[] args){
+        String str1 = "JustPaying";
+        String target = "JusPay";
+        System.out.println(removeCharacter(str1.toLowerCase(),target.toLowerCase()));
+    }
+    public static int removeCharacter(String str, String target){
+        char[] str1 = str.toCharArray();
+        char[] tar = target.toCharArray();
+        int count=0;
+        if(str.length()<target.length()){
+            count = 0;
+        }
+        for(int i=0;i<str1.length;i++){
+            int a=0;
+            for(int j=0;j<tar.length;j++){
+                if(str1[i]==tar[j]){
+                    tar[j]='/';
+                    a++;
+                    break;
+                }
+            }
+            if(a==0)
+                count++;
+        }
+        return count;
+    }
+}
